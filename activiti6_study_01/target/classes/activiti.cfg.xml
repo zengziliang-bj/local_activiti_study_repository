@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+
+    <!-- <property name="jdbcUrl" value="jdbc:mysql://192.168.222.131:3306/vhr?useUnicode=true&amp;characterEncoding=UTF-8" />
+    <property name="jdbcDriver" value="com.mysql.cj.jdbc.Driver" />
+    <property name="jdbcUsername" value="root" />
+    <property name="jdbcPassword" value="beijing520@ubuntu" /> -->
+    <property name="dataSource" ref="dataSorces"></property>
+
+    <property name="databaseSchemaUpdate" value="true" />
+    
+    <property name="enableDatabaseEventLogging" value="true"></property>
+  </bean>
+
+
+
+	<bean id="dataSorces" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://192.168.222.131:3306/vhr?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="beijing520@ubuntu"></property>
+		<property name="initialSize" value="5"></property>
+		<property name="maxActive" value="20"></property>
+		<property name="filters" value="stat,slf4j"></property>
+	</bean>
+</beans>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="dataSource" ref="dataSorces"></property>
+    <property name="databaseSchemaUpdate" value="true" />
+    
+    <!-- 第一种配置事件监听的方法 -->
+   <!--  <property name="eventListeners">
+    	<list>
+    		<bean class="com.gientech.activiti.event.ProcessEventListener"/>
+    		<bean class="com.gientech.activiti.event.CustomEventListener"/>
+    	</list>
+    </property> -->
+    
+    <!-- 第二种配置事件监听的方法 -->
+    <!-- <property name="typedEventListeners">
+    	<map>
+    		<entry key="PROCESS_STARTED">
+    			<list>
+    				<bean class="com.gientech.activiti.event.ProcessEventListener"/>
+    			</list>
+    		</entry>
+    	</map>
+    </property> -->
+  </bean>
+
+	<bean id="dataSorces" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://192.168.222.131:3306/vhr?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="beijing520@ubuntu"></property>
+		<property name="initialSize" value="5"></property>
+		<property name="maxActive" value="20"></property>
+		<property name="filters" value="stat,slf4j"></property>
+	</bean>
+</beans>
